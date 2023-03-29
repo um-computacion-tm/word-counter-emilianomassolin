@@ -1,18 +1,16 @@
 import unittest
 
 def decimal_to_roman(decimal):
-    total = ''
-    if decimal >= 100:
-        centena = decimal // 100
-        total = 'C' * centena
-        decimal = decimal % 100 
-    if decimal <= 3:
-        total += 'I' * decimal
-    elif decimal == 5:
-        total += 'V'
-    elif decimal == 10:
-        total += "X"
-    return total
+
+    valores = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+    simbolos = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I']
+    resultado = ''
+    for i in range(len(valores)):
+        while decimal >= valores[i]:
+            decimal -= valores[i]
+            resultado += simbolos[i]
+    return resultado
+
 
 
 
@@ -64,6 +62,10 @@ class TestDecimalToRoman(unittest.TestCase):
     def test_docientos_tres(self):
         resultado = decimal_to_roman(203)
         self.assertEqual(resultado, 'CCIII')
+    def test_ocho(self):
+        resultado = decimal_to_roman(8)
+        self.assertEqual(resultado, 'VIII')
+       
 
 
 
